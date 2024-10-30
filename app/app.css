@@ -63,3 +63,15 @@ body {
     font-weight: 800;
     text-decoration: none;
   }
+
+  .delete-li {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .delete-button {
+    color: white;
+    background-color: red;
+  }

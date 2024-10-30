@@ -25,27 +25,35 @@ export default function App() {
     listTodos();
   }, []);
 
+    
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+
   function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
+    const content = window.prompt("Añade un nuevo todo");
+    if (content) {
+      client.models.Todo.create({
+        content,
+      });
+    }
   }
 
   return (
     <main>
       <h1>My todos</h1>
-      <button onClick={createTodo}>+ new</button>
+      <button onClick={createTodo}>+ nuevo</button>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+          <div>
+            <li className="delete-li" key={todo.id}>{todo.content}<button onClick={() => deleteTodo(todo.id)} className="delete-button">-</button>
+            </li>
+            </div>
         ))}
       </ul>
       <div>
-        🥳 App successfully hosted. Try creating a new todo.
+        🥳 App Todo creada desplegada en AWS Amplify
         <br />
-        <a href="https://docs.amplify.aws/nextjs/start/quickstart/nextjs-app-router-client-components/">
-          Review next steps of this tutorial.
-        </a>
       </div>
     </main>
   );
